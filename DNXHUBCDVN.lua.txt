@@ -11,7 +11,7 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 -- ======= CẤU HÌNH =======
 local REQUIRED_KEY = "DuyNguIOS On Top"
-local COPY_LINK = "https://link4m.com/dyo6u"
+local COPY_LINK = "https://link4m.com/xTciEeY"
 local REMOTE_RUN_LINE = 'https://raw.githubusercontent.com/DuyNguIOD/DNX-HUB/refs/heads/main/DNXHUB.lua.txt'
 -- =========================
 
