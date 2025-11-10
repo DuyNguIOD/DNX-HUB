@@ -2205,3 +2205,50 @@ Tabs.More:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/dyumra/Detail/refs/heads/main/Somtank"))()
     end
 })
+
+
+-- 🌈 Rainbow nhẹ cho viền khung GUI chính (UIStroke border)
+task.spawn(function()
+    local TweenService = game:GetService("TweenService")
+    local CoreGui = game:GetService("CoreGui")
+
+    -- Đợi WindUI hiển thị frame chính
+    task.wait(1)
+    local mainGui
+    for _, gui in pairs(CoreGui:GetChildren()) do
+        if gui:IsA("ScreenGui") and gui.Name:match("WindUI") then
+            mainGui = gui
+            break
+        end
+    end
+
+    if not mainGui then return end
+
+    -- Tạo hoặc lấy UIStroke viền
+    local frame = mainGui:FindFirstChildWhichIsA("Frame", true)
+    if not frame then return end
+
+    local stroke = frame:FindFirstChildOfClass("UIStroke") or Instance.new("UIStroke")
+    stroke.Thickness = 2
+    stroke.Parent = frame
+
+    local colors = {
+        Color3.fromRGB(255, 0, 0),
+        Color3.fromRGB(255, 127, 0),
+        Color3.fromRGB(255, 255, 0),
+        Color3.fromRGB(0, 255, 0),
+        Color3.fromRGB(0, 0, 255),
+        Color3.fromRGB(75, 0, 130),
+        Color3.fromRGB(148, 0, 211)
+    }
+
+    local idx = 1
+    local duration = 1
+
+    while task.wait(duration) and stroke and stroke.Parent do
+        local nextIdx = idx % #colors + 1
+        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear)
+        TweenService:Create(stroke, tweenInfo, {Color = colors[nextIdx]}):Play()
+        idx = nextIdx
+    end
+end)
