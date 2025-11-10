@@ -601,6 +601,43 @@ Tabs.Misc = Window:Tab({
 
 Window:SelectTab(1)
 
+-- 🌈 Hiệu ứng Rainbow nhẹ cho viền & tiêu đề DNX GUI
+task.spawn(function()
+    local TweenService = game:GetService("TweenService")
+    local colors = {
+        Color3.fromRGB(255, 0, 0),
+        Color3.fromRGB(255, 127, 0),
+        Color3.fromRGB(255, 255, 0),
+        Color3.fromRGB(0, 255, 0),
+        Color3.fromRGB(0, 0, 255),
+        Color3.fromRGB(75, 0, 130),
+        Color3.fromRGB(148, 0, 211)
+    }
+
+    local idx = 1
+    local duration = 0.8
+
+    while task.wait(duration) do
+        local nextIdx = idx % #colors + 1
+        local info = TweenInfo.new(duration, Enum.EasingStyle.Linear)
+        local color = colors[nextIdx]
+
+        pcall(function()
+            Window:EditOpenButton({
+                Title = "🌈 DNX HUB - 99 Night",
+                Icon = "monitor",
+                CornerRadius = UDim.new(0, 6),
+                StrokeThickness = 2,
+                Color = ColorSequence.new(color, color),
+                Draggable = true,
+            })
+        end)
+
+        idx = nextIdx
+    end
+end)
+
+
 Tabs.Combat:Section({ Title = "Aura", Icon = "star" })
 
 Tabs.Combat:Toggle({
